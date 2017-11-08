@@ -1,6 +1,6 @@
 ﻿
 var application = angular.module('application', []);
-// #region Directives
+// #region Directives   
 
 // #region Directive: Grid Main Content
 application.directive('smartGridcomplist', function () {
