@@ -55,12 +55,12 @@
 
                 </div>
                 <div class="col3 inputSearchContentPlace" ng-if="isSearchField">
-                    <input type="search" class="inputSearchContent" ng-model="selectedTag" placeholder="جستجو"
-                           ng-enter="addSearchTag(selectedTag)">
+                    <input type="search" class="inputSearchContent" ng-model="selectedTag" placeholder="جستجو" ng-enter="addSearchTag(selectedTag)">
                     <span class="icon" data-icon=""></span>
                 </div>
                 <div class="col2">
-                    <a style="background-color: rgb(230, 230, 230) !important;line-height:30px; color: rgb(102, 102, 102);padding: 3px;" class="btnPageOk" ng-click="advanceSearch(0, 'pagination')">جستجو</a>
+                    <a style="background-color: rgb(230, 230, 230) !important;line-height:30px; color: rgb(102, 102, 102);padding: 3px;" class="btnPageOk"
+                        ng-click="advanceSearch(0, 'pagination')">جستجو</a>
                 </div>
             </div>
             <div class="row rowSpaceForm" ng-if="tagListFieldSearch.length>0">
@@ -70,9 +70,7 @@
                         <ul style="height:37px;vertical-align:middle;display:table-cell;">
                             <li ng-repeat="searchItem in tagListFieldSearch">
                                 <div class="filter-tag-item">
-                                    {{searchItem.displayName}}
-                                    :
-                                    {{searchItem.selectedTag}}
+                                    {{searchItem.displayName}} : {{searchItem.selectedTag}}
                                     <span style="cursor:pointer" class="icon" data-icon="" ng-click="removeSearchTag(searchItem)"></span>
                                 </div>
                             </li>
@@ -103,25 +101,27 @@
         </div>
         <div class="coll{{defaultTinyColSize}}">
             <div class="cell colSearchClear">
-                <a class="" href="" ng-click="clearSearchAria()"><span class="icon" data-icon="&#xe20d;"></span></a>
+                <a class="" href="" ng-click="clearSearchAria()">
+                    <span class="icon" data-icon="&#xe20d;"></span>
+                </a>
             </div>
         </div>
 
         <div class="coll{{colName.colSize}} searchAria" ng-repeat="colName in gridKey" ng-if="colName.name != '_id' && colName.name != 'id' ">
             <div class="cell">
-                <input class="gridInputDefaultSearch gridInputDefaultSearch_{{gridName}} {{colName.fieldType}} " id="{{colName.name}}" type="search" ng-if="colName.fildSearch != 'noFilter' && !colName.isDropDownSearch && colName.searchInpType!=='number'"
-                       value="{{colName.searchVal}}" ng-model="colName.searchVal" ng-enter="enterSearch(colName.name , colName.fildSearch)" data-search="{{colName.fildSearch}}">
+                <input class="gridInputDefaultSearch gridInputDefaultSearch_{{gridName}} {{colName.fieldType}} " id="{{colName.name}}" type="search"
+                    ng-if="colName.fildSearch != 'noFilter' && !colName.isDropDownSearch && colName.searchInpType!=='number'"
+                    value="{{colName.searchVal}}" ng-model="colName.searchVal" ng-enter="enterSearch(colName.name , colName.fildSearch)"
+                    data-search="{{colName.fildSearch}}">
 
-                <input integer-only class="gridInputDefaultSearch {{colName.fieldType}}" id="{{colName.name}}" type="search" ng-if="colName.fildSearch != 'noFilter' && !colName.isDropDownSearch && colName.searchInpType==='number'"
-                       value="{{colName.searchVal}}" ng-enter="enterSearch(colName.name , colName.fildSearch)"
-                       ng-model="colName.searchVal"
-                       data-search="{{colName.fildSearch}}">
+                <input integer-only class="gridInputDefaultSearch gridInputDefaultSearch_{{gridName}} {{colName.fieldType}}" id="{{colName.name}}"
+                    type="search" ng-if="colName.fildSearch != 'noFilter' && !colName.isDropDownSearch && colName.searchInpType==='number'"
+                    value="{{colName.searchVal}}" ng-enter="enterSearch(colName , colName.fildSearch)" ng-model="colName.searchVal"
+                    data-search="{{colName.fildSearch}}">
 
 
-                <select ng-model="colName.isDropDownSearch.value" ng-if="colName.isDropDownSearch" class="gridInputDefaultSearch"
-                        data-search="{{colName.fildSearch}}"
-                        ng-options="v for v in  colName.isDropDownSearch.values"
-                        ng-change="enterSearch('status' , colName)"></select>
+                <select ng-model="colName.isDropDownSearch.value" ng-if="colName.isDropDownSearch" class="gridInputDefaultSearch" data-search="{{colName.fildSearch}}"
+                    ng-options="v for v in  colName.isDropDownSearch.values" ng-change="enterSearch('status' , colName)"></select>
             </div>
         </div>
         <!---
@@ -160,21 +160,26 @@
 
             <div class="cell collNo" style="border-radius: 4px 4px 0 0;">
                 <span>{{colName.displayName}}</span>
-                <a class="sortIcon" ng-if="colName.name != '_id' && colName.hasSort"
-                   ng-click="_doSort(colName)"><span class="icon icon-{{colName.sortIcon}}"></span></a>
+                <a class="sortIcon" ng-if="colName.name != '_id' && colName.hasSort" ng-click="_doSort(colName)">
+                    <span class="icon icon-{{colName.sortIcon}}"></span>
+                </a>
             </div>
         </div>
         <!--
         <div class="coll5"><div class="cell">&nbsp;</div></div>
         -->
         <div class="coll10" ng-if="extraCol">
-            <div class="cell"><span>ت شروع</span></div>
+            <div class="cell">
+                <span>ت شروع</span>
+            </div>
             <!--<div class="cell" title="{{rowData[0].obj.extraField}}">{{rowData[0].obj.extraField}}</div>-->
         </div>
         <div class="coll{{tinyActionColumnsSize}}" ng-if="tinyColumnsFlag">
             <div class="cell" style="border-radius: 4px 0 0;">
                 <span></span>
-                <a class="sortIcon" href=""><span class="icon" data-icon=""></span></a>
+                <a class="sortIcon" href="">
+                    <span class="icon" data-icon=""></span>
+                </a>
             </div>
         </div>
         <!--<div class="coll{{defaultActionColSize}}" ng-show="detailBtnActionEditFlag">
@@ -191,16 +196,14 @@
 
 
     </li>
-    <li class="roww {{rowData[0].obj.colorSelected}}" ng-repeat="rowData in gridData" ng-click="selectRoww(rowData)"
-        data-id="{{rowData[0].obj._id}}" ng-dblclick="_doDetail(rowData)">
+    <li class="roww {{rowData[0].obj.colorSelected}}" ng-repeat="rowData in gridData" ng-click="selectRoww(rowData)" data-id="{{rowData[0].obj._id}}"
+        ng-dblclick="_doDetail(rowData)">
         <div class="coll{{defaultTinyColSize}} checkandtag" ng-if="selectAllFlag && checkBoxForRowFlag">
             <div class="cell cellBtnAction">
                 <div class="checkbox-inline">
                     <label class="cr-styled">
-                        <input class="" type="checkbox" id="{{rowData._id.fieldName}}" name="{{rowData._id.fieldName}}"
-                               ng-model="rowData.Selected"
-                               ng-checked="_isSelected(rowData)"
-                               ng-click="_updateSelection($event,rowData)" />
+                        <input class="" type="checkbox" id="{{rowData._id.fieldName}}" name="{{rowData._id.fieldName}}" ng-model="rowData.Selected"
+                            ng-checked="_isSelected(rowData)" ng-click="_updateSelection($event,rowData)" />
                         <i class="icon"></i>
                     </label>
                 </div>
@@ -212,15 +215,15 @@
 
         <div ng-if="moreInfoPlace" class="coll{{defaultActionColSize}} cell" ng-click="openCollaps(rowData[0].obj)">+</div>
 
-        <div ng-if="rowField.fieldName != undefined && rowField.fieldType != 'id'  && !rowField.fieldIsDropDown" class="coll{{rowField.filedSize}}" ng-repeat="rowField in rowData">
+        <div ng-if="rowField.fieldName != undefined && rowField.fieldType != 'id'  && !rowField.fieldIsDropDown" class="coll{{rowField.filedSize}}"
+            ng-repeat="rowField in rowData">
             <div class="cell" title="{{rowField.fieldName}}">{{rowField.celFieldName}}</div>
         </div>
 
-        <div ng-if="rowField.fieldName != undefined && rowField.fieldType != 'id' && rowField.fieldIsDropDown" class="coll{{rowField.filedSize}}" ng-repeat="rowField in rowData">
+        <div ng-if="rowField.fieldName != undefined && rowField.fieldType != 'id' && rowField.fieldIsDropDown" class="coll{{rowField.filedSize}}"
+            ng-repeat="rowField in rowData">
             <div class="cell">
-                <select class="formInputNumberSpinIn"
-                        ng-model="rowField.fieldIsDropDownArr.value"
-                        ng-change="selectDrpOpt(rowField.fieldIsDropDownArr.value,rowData)">
+                <select class="formInputNumberSpinIn" ng-model="rowField.fieldIsDropDownArr.value" ng-change="selectDrpOpt(rowField.fieldIsDropDownArr.value,rowData)">
                     <option value="">انتخاب کنید</option>
                     <option ng-repeat="v in  rowField.fieldIsDropDownArr.values">{{v}}</option>
                 </select>
@@ -241,23 +244,33 @@
         <div class="coll{{tinyActionColumnsSize}}" ng-if="tinyColumnsFlag">
             <div class="cell cellBtnAction">
                 <span class="" ng-if="showHideAttchmentFlag">
-                    <a href="" ng-if="rowData[0].obj.showHideType" title="فایل" class=""><span class="icon icon-attach"></span></a>
+                    <a href="" ng-if="rowData[0].obj.showHideType" title="فایل" class="">
+                        <span class="icon icon-attach"></span>
+                    </a>
                 </span>
-                 <span class="" ng-if="deleteBtnActionFlag">
-                    <a class="" title="حذف" ng-click="deletAction(rowData)"><span class="icon icon-delete-trash-1"></span></a>
+                <span class="" ng-if="deleteBtnActionFlag">
+                    <a class="" title="حذف" ng-click="deletAction(rowData)">
+                        <span class="icon icon-delete-trash-1"></span>
+                    </a>
                 </span>
                 <span class="" ng-if="detailBtnActionEditFlag">
-                    <a href="" title="ویرایش" class="" ng-click="_doEdit(rowData)"><span class="icon icon-edit-pen-1"></span></a>
+                    <a href="" title="ویرایش" class="" ng-click="_doEdit(rowData)">
+                        <span class="icon icon-edit-pen-1"></span>
+                    </a>
                 </span>
                 <span class="" ng-if="detailBtnActionFlag">
-                    <a href="" title="نمایش" class="" ng-click="_doDetail(rowData)"><span class="icon" data-icon="&#xe0b7;"></span></a>
+                    <a href="" title="نمایش" class="" ng-click="_doDetail(rowData)">
+                        <span class="icon" data-icon="&#xe0b7;"></span>
+                    </a>
                 </span>
                 <span class="" ng-if="desiredButsItems.length>0">
-                    <a ng-repeat="desiItem in desiredButsItems" class="" title="{{desiItem.titleTxt}}" ng-click="desiAction(desiItem.icon,rowData)"><span class="icon icon-{{desiItem.icon}}"></span></a>
+                    <a ng-repeat="desiItem in desiredButsItems" class="" title="{{desiItem.titleTxt}}" ng-click="desiAction(desiItem.icon,rowData)">
+                        <span class="icon icon-{{desiItem.icon}}"></span>
+                    </a>
                 </span>
-             
 
-                
+
+
             </div>
 
         </div>
@@ -284,4 +297,3 @@
         </div>-->
     </li>
 </ul>
-

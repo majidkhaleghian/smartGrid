@@ -259,24 +259,42 @@ application.factory('gridFactory', ['$http', function ($http) {
             scope.setCurrent(0, 'pagination', callback);
         };
 
-        scope.enterSearch = function (colType, colSearch) {
+        scope.enterSearch = function (col, colSearch) {
             var searchFields = [];
+
+            var colType = col.name;
 
             localStorage.setItem('currentEnterd', colType);
             $("div.searchAria input.gridInputDefaultSearch_" + scope.gridName).each(function () {
                 if (searchFields.indexOf($(this).attr('data-search')) === -1) {
                     searchFields.push($(this).attr('data-search'));
                     if ($(this).attr('data-search') != undefined) {
+                        var val = $(this)[0].value;
+                        if (val !== '') {
+                            if (col.searchInpType === 'number') {
+                                 val = parseInt($(this)[0].value);
+                            } else {
+                                val = $(this)[0].value;
+                            }
+                        }
                         if (scope.filterExample)
-                            (scope.searchData[scope.filterExample])[$(this).attr('data-search')] = $(this)[0].value === '' ? null : $(this)[0].value;
+                            (scope.searchData[scope.filterExample])[$(this).attr('data-search')] = val === '' ? null : val;
                         else
-                            scope.searchData[$(this).attr('data-search')] = $(this)[0].value === '' ? null : $(this)[0].value;
+                            scope.searchData[$(this).attr('data-search')] = val === '' ? null : val;
                     }
                     else {
+                        var val = $(this)[0].value;
+                        if (val !== '') {
+                            if (col.searchInpType === 'number') {
+                                val = parseInt($(this)[0].value);
+                            } else {
+                                val = $(this)[0].value;
+                            }
+                        }
                         if (scope.filterExample)
-                            (scope.searchData[scope.filterExample])[$(this).attr('id')] = $(this)[0].value === '' ? null : $(this)[0].value;
+                            (scope.searchData[scope.filterExample])[$(this).attr('id')] = val === '' ? null : val;
                         else
-                            scope.searchData[$(this).attr('id')] = $(this)[0].value === '' ? null : $(this)[0].value;
+                            scope.searchData[$(this).attr('id')] = val === '' ? null : val;
                     }
                 }
             });
